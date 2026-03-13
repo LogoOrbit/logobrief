@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogoOrbit — Design Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:#080811;min-height:100vh;padding:2rem 1rem 5rem;color:#fff}
+.container{max-width:620px;margin:0 auto}
+
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:2rem}
+.brand-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#db2777);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
+.brand-name{font-size:1.4rem;font-weight:700;color:#fff;letter-spacing:-0.5px}
+.brand-name span{color:#a78bfa}
+
+.hero{text-align:center;margin-bottom:2rem}
+.hero h1{font-size:1.9rem;font-weight:700;line-height:1.2;margin-bottom:.5rem;letter-spacing:-0.5px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:rgba(255,255,255,0.4);font-size:14px}
+
+.pbar{height:3px;background:rgba(255,255,255,0.08);border-radius:100px;margin-bottom:1rem;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,#7c3aed,#db2777);border-radius:100px;transition:width .4s ease;width:0%}
+.plabel{text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:1.5rem}
+
+.card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:20px;padding:1.75rem;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step-lbl{font-size:11px;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:.4rem}
+.card-title{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:1.4rem}
+
+.q{margin-bottom:1.3rem}
+.q:last-of-type{margin-bottom:0}
+.ql{display:block;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:.55rem}
+
+input[type=text],input[type=email],textarea{width:100%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;padding:10px 14px;outline:none;transition:border-color .2s}
+input:focus,textarea:focus{border-color:rgba(167,139,250,0.6);background:rgba(255,255,255,0.08)}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.18)}
+textarea{resize:vertical;min-height:70px;line-height:1.5}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.13);border-radius:100px;color:rgba(255,255,255,0.55);font-size:13px;font-family:'Syne',sans-serif;padding:8px 15px;cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:rgba(167,139,250,0.5);color:#e9d5ff}
+.chip.on{background:rgba(124,58,237,0.25);border-color:rgba(167,139,250,0.7);color:#c4b5fd}
+
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.ic-btn{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 8px;cursor:pointer;transition:all .18s;user-select:none;text-align:center}
+.ic-btn:hover{border-color:rgba(167,139,250,0.4);background:rgba(124,58,237,0.08)}
+.ic-btn.on{background:rgba(124,58,237,0.2);border-color:rgba(167,139,250,0.7)}
+.ic-btn .ico{font-size:20px;margin-bottom:5px;display:block}
+.ic-btn .lbl{font-size:12px;color:rgba(255,255,255,0.55);font-weight:500}
+.ic-btn.on .lbl{color:#c4b5fd}
+
+/* COLOR */
+.cpresets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.cp{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;position:relative;flex-shrink:0}
+.cp:hover{transform:scale(1.15)}
+.cp.on{border-color:#fff;transform:scale(1.12)}
+.cp.on::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+.crow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.crow label{font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap}
+input[type=color]{width:36px;height:32px;border-radius:8px;border:0.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);cursor:pointer;padding:2px}
+.chex{flex:1;max-width:110px}
+.addbtn{background:rgba(124,58,237,.2);border:0.5px solid rgba(167,139,250,.4);border-radius:8px;color:#a78bfa;font-size:12px;font-family:'Syne',sans-serif;padding:7px 12px;cursor:pointer;white-space:nowrap;transition:all .18s}
+.addbtn:hover{background:rgba(124,58,237,.35)}
+.seltags{display:flex;flex-wrap:wrap;gap:6px;min-height:8px}
+.stag{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.12);border-radius:100px;padding:4px 10px 4px 6px;font-size:12px;color:rgba(255,255,255,.55)}
+.swatch{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.rm{cursor:pointer;color:rgba(255,255,255,.3);margin-left:3px;font-size:15px;line-height:1}
+.rm:hover{color:#f472b6}
+
+.nav{display:flex;gap:10px;margin-top:1.5rem}
+.bbk{flex:1;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.12);border-radius:12px;color:rgba(255,255,255,.45);font-family:'Syne',sans-serif;font-size:14px;font-weight:500;padding:12px;cursor:pointer;transition:all .18s}
+.bbk:hover{background:rgba(255,255,255,.1)}
+.bnx{flex:2;background:linear-gradient(135deg,#7c3aed,#db2777);border:none;border-radius:12px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;padding:12px;cursor:pointer;transition:opacity .2s,transform .15s}
+.bnx:hover{opacity:.9;transform:translateY(-1px)}
+.bnx:active{transform:translateY(0)}
+.bnx:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.bsolo{flex:1}
+
+.ty{display:none;text-align:center;padding:3rem 1.5rem;background:rgba(255,255,255,.04);border:0.5px solid rgba(124,58,237,.3);border-radius:20px}
+.ty .big{font-size:50px;margin-bottom:1rem}
+.ty h2{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.ty p{color:rgba(255,255,255,.4);font-size:14px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="brand">
+  <div class="brand-icon">LO</div>
+  <div class="brand-name">Logo<span>Orbit</span></div>
+</div>
+
+<div class="hero">
+  <h1>Tell us about your<br><em>dream logo</em></h1>
+  <p>Quick questions — takes about 2 minutes.</p>
+</div>
+
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="plabel" id="plbl">Step 1 of 6</div>
+
+<form id="brief">
+
+<!-- S1 -->
+<div class="card" id="s1">
+  <div class="step-lbl">Step 1 of 6</div>
+  <div class="card-title">About you & your brand</div>
+  <div class="q"><span class="ql">Your name</span><input type="text" name="name" placeholder="Jane Smith"></div>
+  <div class="q"><span class="ql">Email address</span><input type="email" name="email" placeholder="jane@company.com"></div>
+  <div class="q"><span class="ql">Brand / Company name</span><input type="text" name="company" placeholder="e.g. Acme Studios"></div>
+  <div class="q"><span class="ql">Industry</span>
+    <div class="chips" id="ind">
+      <span class="chip" data-v="Fashion & Beauty">Fashion & Beauty</span>
+      <span class="chip" data-v="Food & Beverage">Food & Drink</span>
+      <span class="chip" data-v="Tech & Software">Tech</span>
+      <span class="chip" data-v="Health & Fitness">Health & Fitness</span>
+      <span class="chip" data-v="Real Estate">Real Estate</span>
+      <span class="chip" data-v="Education">Education</span>
+      <span class="chip" data-v="Finance">Finance</span>
+      <span class="chip" data-v="Creative & Media">Creative</span>
+      <span class="chip" data-v="Retail">Retail</span>
+      <span class="chip" data-v="Other">Other</span>
+    </div>
+    <input type="hidden" name="industry" id="ind-v">
+  </div>
+  <div class="nav"><button type="button" class="bnx bsolo" onclick="go(2)">Next →</button></div>
+</div>
+
+<!-- S2 -->
+<div class="card" id="s2" style="display:none">
+  <div class="step-lbl">Step 2 of 6</div>
+  <div class="card-title">What kind of logo?</div>
+  <div class="q"><span class="ql">Logo type</span>
+    <div class="igrid" id="ltype">
+      <div class="ic-btn" data-v="Wordmark (text only)"><span class="ico">Aa</span><span class="lbl">Text only</span></div>
+      <div class="ic-btn" data-v="Lettermark (initials)"><span class="ico">AB</span><span class="lbl">Initials</span></div>
+      <div class="ic-btn" data-v="Icon + Text"><span class="ico">◆ Aa</span><span class="lbl">Icon + Text</span></div>
+      <div class="ic-btn" data-v="Icon only"><span class="ico">◆</span><span class="lbl">Icon only</span></div>
+      <div class="ic-btn" data-v="Emblem / Badge"><span class="ico">🔰</span><span class="lbl">Emblem</span></div>
+      <div class="ic-btn" data-v="No preference"><span class="ico">✦</span><span class="lbl">You decide</span></div>
+    </div>
+    <input type="hidden" name="logotype" id="ltype-v">
+  </div>
+  <div class="q"><span class="ql">Exact text in logo</span><input type="text" name="logo_text" placeholder="e.g. LogoOrbit"></div>
+  <div class="q"><span class="ql">Tagline <span style="opacity:.35;font-size:11px">(optional)</span></span><input type="text" name="tagline" placeholder="e.g. Design that orbits excellence"></div>
+  <div class="q"><span class="ql">New brand or rebrand?</span>
+    <div class="chips" id="nbr">
+      <span class="chip" data-v="Brand new">Brand new</span>
+      <span class="chip" data-v="Rebrand">Rebrand</span>
+      <span class="chip" data-v="Minor refresh">Minor refresh</span>
+    </div>
+    <input type="hidden" name="newrebrand" id="nbr-v">
+  </div>
+  <div class="nav">
+    <button type="button" class="bbk" onclick="go(1)">← Back</button>
+    <button type="button" class="bnx" onclick="go(3)">Next →</button>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="card" id="s3" style="display:none">
+  <div class="step-lbl">Step 3 of 6</div>
+  <div class="card-title">Style & vibe</div>
+  <div class="q"><span class="ql">Pick all styles that feel right</span>
+    <div class="igrid" id="sty">
+      <div class="ic-btn" data-v="Minimalist"><span class="ico">—</span><span class="lbl">Minimalist</span></div>
+      <div class="ic-btn" data-v="Bold & Strong"><span class="ico">⬛</span><span class="lbl">Bold</span></div>
+      <div class="ic-btn" data-v="Elegant & Luxury"><span class="ico">✦</span><span class="lbl">Luxury</span></div>
+      <div class="ic-btn" data-v="Playful & Fun"><span class="ico">✿</span><span class="lbl">Playful</span></div>
+      <div class="ic-btn" data-v="Vintage & Retro"><span class="ico">⌛</span><span class="lbl">Vintage</span></div>
+      <div class="ic-btn" data-v="Modern & Sleek"><span class="ico">◈</span><span class="lbl">Modern</span></div>
+      <div class="ic-btn" data-v="Geometric"><span class="ico">△</span><span class="lbl">Geometric</span></div>
+      <div class="ic-btn" data-v="Handcrafted"><span class="ico">✍</span><span class="lbl">Handcrafted</span></div>
+      <div class="ic-btn" data-v="Tech & Futuristic"><span class="ico">◉</span><span class="lbl">Tech</span></div>
+      <div class="ic-btn" data-v="Nature-inspired"><span class="ico">❧</span><span class="lbl">Nature</span></div>
+    </div>
+    <input type="hidden" name="style" id="sty-v">
+  </div>
+  <div class="q"><span class="ql">3 words that describe your brand</span><input type="text" name="keywords" placeholder="e.g. Premium, bold, trustworthy"></div>
+  <div class="q"><span class="ql">Logos you love <span style="opacity:.35;font-size:11px">(brand names)</span></span><input type="text" name="admire" placeholder="e.g. Apple, Nike, Rolex..."></div>
+  <div class="nav">
+    <button type="button" class="bbk" onclick="go(2)">← Back</button>
+    <button type="button" class="bnx" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="card" id="s4" style="display:none">
+  <div class="step-lbl">Step 4 of 6</div>
+  <div class="card-title">Colors</div>
+  <div class="q">
+    <span class="ql">Pick colors you like — or add a custom one</span>
+    <div class="cpresets" id="cpreset">
+      <div class="cp" style="background:#1a1a2e" data-v="Dark Navy" title="Dark Navy"></div>
+      <div class="cp" style="background:#c9a96e" data-v="Gold" title="Gold"></div>
+      <div class="cp" style="background:#f5f5f0;border:1px solid #bbb" data-v="White" title="White"></div>
+      <div class="cp" style="background:#2d6a4f" data-v="Forest Green" title="Forest Green"></div>
+      <div class="cp" style="background:#e63946" data-v="Bold Red" title="Bold Red"></div>
+      <div class="cp" style="background:#f4a261" data-v="Warm Orange" title="Warm Orange"></div>
+      <div class="cp" style="background:#a8dadc" data-v="Soft Teal" title="Soft Teal"></div>
+      <div class="cp" style="background:#6d3fc8" data-v="Purple" title="Purple"></div>
+      <div class="cp" style="background:#457b9d" data-v="Steel Blue" title="Steel Blue"></div>
+      <div class="cp" style="background:#f9c74f" data-v="Yellow" title="Yellow"></div>
+      <div class="cp" style="background:#264653" data-v="Dark Teal" title="Dark Teal"></div>
+      <div class="cp" style="background:#ff6b9d" data-v="Pink" title="Pink"></div>
+      <div class="cp" style="background:#111111" data-v="Black" title="Black"></div>
+      <div class="cp" style="background:#b5b5b5" data-v="Silver" title="Silver"></div>
+      <div class="cp" style="background:#8B4513" data-v="Brown" title="Brown"></div>
+      <div class="cp" style="background:#FF4500" data-v="Deep Orange" title="Deep Orange"></div>
+      <div class="cp" style="background:#00CED1" data-v="Turquoise" title="Turquoise"></div>
+      <div class="cp" style="background:#DC143C" data-v="Crimson" title="Crimson"></div>
+      <div class="cp" style="background:#4B0082" data-v="Indigo" title="Indigo"></div>
+      <div class="cp" style="background:#228B22" data-v="Lime Green" title="Lime Green"></div>
+    </div>
+    <div class="crow">
+      <label>Custom color:</label>
+      <input type="color" id="cpk" value="#7c3aed">
+      <input type="text" class="chex" id="chx" placeholder="#7c3aed" maxlength="7">
+      <button type="button" class="addbtn" onclick="addColor()">+ Add</button>
+    </div>
+    <div class="seltags" id="stags"></div>
+    <input type="hidden" name="colors" id="col-v">
+  </div>
+  <div class="q"><span class="ql">Colors to avoid</span><input type="text" name="avoid_colors" placeholder="e.g. No pink, avoid yellow..."></div>
+  <div class="nav">
+    <button type="button" class="bbk" onclick="go(3)">← Back</button>
+    <button type="button" class="bnx" onclick="go(5)">Next →</button>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="card" id="s5" style="display:none">
+  <div class="step-lbl">Step 5 of 6</div>
+  <div class="card-title">Fonts & usage</div>
+  <div class="q"><span class="ql">Font style</span>
+    <div class="chips" id="fnt">
+      <span class="chip" data-v="Serif">Serif</span>
+      <span class="chip" data-v="Sans-serif">Sans-serif</span>
+      <span class="chip" data-v="Script / Handwritten">Script</span>
+      <span class="chip" data-v="Slab Serif">Slab</span>
+      <span class="chip" data-v="Decorative">Decorative</span>
+      <span class="chip" data-v="Tech / Monospace">Tech / Mono</span>
+      <span class="chip" data-v="You decide">You decide</span>
+    </div>
+    <input type="hidden" name="fontpref" id="fnt-v">
+  </div>
+  <div class="q"><span class="ql">Where will the logo be used?</span>
+    <div class="chips" id="usg">
+      <span class="chip" data-v="Website">Website</span>
+      <span class="chip" data-v="Social Media">Social Media</span>
+      <span class="chip" data-v="Print">Print</span>
+      <span class="chip" data-v="Packaging">Packaging</span>
+      <span class="chip" data-v="Signage">Signage</span>
+      <span class="chip" data-v="Apparel">Apparel</span>
+      <span class="chip" data-v="App / Favicon">App / Favicon</span>
+      <span class="chip" data-v="All of the above">All of above</span>
+    </div>
+    <input type="hidden" name="usage" id="usg-v">
+  </div>
+  <div class="q"><span class="ql">File formats needed</span>
+    <div class="chips" id="fmt">
+      <span class="chip" data-v="SVG">SVG</span>
+      <span class="chip" data-v="PNG">PNG</span>
+      <span class="chip" data-v="PDF">PDF</span>
+      <span class="chip" data-v="EPS / AI">EPS / AI</span>
+      <span class="chip" data-v="All formats">All formats</span>
+      <span class="chip" data-v="Not sure">Not sure</span>
+    </div>
+    <input type="hidden" name="formats" id="fmt-v">
+  </div>
+  <div class="nav">
+    <button type="button" class="bbk" onclick="go(4)">← Back</button>
+    <button type="button" class="bnx" onclick="go(6)">Next →</button>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="card" id="s6" style="display:none">
+  <div class="step-lbl">Step 6 of 6</div>
+  <div class="card-title">Last few details</div>
+  <div class="q"><span class="ql">Deadline</span>
+    <div class="chips" id="ddl">
+      <span class="chip" data-v="ASAP">ASAP</span>
+      <span class="chip" data-v="1 week">1 week</span>
+      <span class="chip" data-v="2 weeks">2 weeks</span>
+      <span class="chip" data-v="1 month+">1 month+</span>
+      <span class="chip" data-v="No rush">No rush</span>
+    </div>
+    <input type="hidden" name="deadline" id="ddl-v">
+  </div>
+  <div class="q"><span class="ql">Budget</span>
+    <div class="chips" id="bdg">
+      <span class="chip" data-v="Under $100">Under $100</span>
+      <span class="chip" data-v="$100–$300">$100–$300</span>
+      <span class="chip" data-v="$300–$600">$300–$600</span>
+      <span class="chip" data-v="$600–$1000">$600–$1k</span>
+      <span class="chip" data-v="$1000+">$1000+</span>
+      <span class="chip" data-v="Prefer not to say">Prefer not to say</span>
+    </div>
+    <input type="hidden" name="budget" id="bdg-v">
+  </div>
+  <div class="q"><span class="ql">Anything else? <span style="opacity:.35;font-size:11px">(optional)</span></span><textarea name="extra" placeholder="Ideas, symbols, references, must-haves..."></textarea></div>
+  <div class="nav">
+    <button type="button" class="bbk" onclick="go(5)">← Back</button>
+    <button type="submit" class="bnx" id="subbtn">Submit brief ✦</button>
+  </div>
+</div>
+
+</form>
+
+<div class="ty" id="ty">
+  <div class="big">🚀</div>
+  <h2>Brief received!</h2>
+  <p>Thanks for trusting <strong>LogoOrbit</strong> with your brand.<br>We'll be in touch within 1–2 business days.</p>
+</div>
+
+</div>
+<script>
+const TOTAL=6;
+let cur=1;
+const FORMSPREE='https://formspree.io/f/xlgpnoza';
+
+function go(n){
+  document.getElementById('s'+cur).style.display='none';
+  document.getElementById('s'+n).style.display='block';
+  cur=n;
+  document.getElementById('pf').style.width=((n-1)/TOTAL*100)+'%';
+  document.getElementById('plbl').textContent='Step '+n+' of '+TOTAL;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function initChips(id,hid,multi){
+  const w=document.getElementById(id); if(!w) return;
+  w.querySelectorAll('.chip,.ic-btn').forEach(c=>{
+    c.addEventListener('click',()=>{
+      if(!multi) w.querySelectorAll('.chip,.ic-btn').forEach(x=>x.classList.remove('on'));
+      c.classList.toggle('on');
+      document.getElementById(hid).value=[...w.querySelectorAll('.chip.on,.ic-btn.on')].map(x=>x.dataset.v).join(', ');
+    });
+  });
+}
+
+initChips('ind','ind-v',false);
+initChips('ltype','ltype-v',false);
+initChips('nbr','nbr-v',false);
+initChips('sty','sty-v',true);
+initChips('fnt','fnt-v',false);
+initChips('usg','usg-v',true);
+initChips('fmt','fmt-v',true);
+initChips('ddl','ddl-v',false);
+initChips('bdg','bdg-v',false);
+
+let selCols=[];
+document.querySelectorAll('.cp').forEach(d=>{
+  d.addEventListener('click',()=>{
+    if(d.classList.contains('on')){
+      d.classList.remove('on');
+      selCols=selCols.filter(c=>c.name!==d.dataset.v);
+    } else {
+      d.classList.add('on');
+      selCols.push({name:d.dataset.v,hex:d.style.background});
+    }
+    renderCols();
+  });
+});
+
+const cpk=document.getElementById('cpk');
+const chx=document.getElementById('chx');
+cpk.addEventListener('input',()=>chx.value=cpk.value);
+chx.addEventListener('input',()=>{ if(/^#[0-9a-fA-F]{6}$/.test(chx.value)) cpk.value=chx.value; });
+
+function addColor(){
+  const hex=/^#[0-9a-fA-F]{6}$/.test(chx.value)?chx.value:cpk.value;
+  if(!selCols.find(c=>c.hex===hex)){ selCols.push({name:hex,hex:hex}); renderCols(); }
+}
+
+function renderCols(){
+  const w=document.getElementById('stags'); w.innerHTML='';
+  selCols.forEach((c,i)=>{
+    const el=document.createElement('div'); el.className='stag';
+    el.innerHTML=`<div class="swatch" style="background:${c.hex}"></div><span>${c.name}</span><span class="rm" onclick="rmCol(${i})">×</span>`;
+    w.appendChild(el);
+  });
+  document.getElementById('col-v').value=selCols.map(c=>c.name).join(', ');
+}
+
+function rmCol(i){
+  document.querySelectorAll('.cp').forEach(d=>{ if(d.dataset.v===selCols[i].name) d.classList.remove('on'); });
+  selCols.splice(i,1); renderCols();
+}
+
+document.getElementById('brief').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('subbtn');
+  btn.disabled=true; btn.textContent='Sending…';
+  const fd=new FormData(this); const data={};
+  fd.forEach((v,k)=>{ data[k]=v||'—'; });
+  data.summary=`LOGO BRIEF — LogoOrbit\n${'─'.repeat(30)}\nNAME: ${data.name}\nEMAIL: ${data.email}\nCOMPANY: ${data.company}\nINDUSTRY: ${data.industry}\n\nLOGO TYPE: ${data.logotype}\nTEXT: ${data.logo_text}\nTAGLINE: ${data.tagline}\nNEW/REBRAND: ${data.newrebrand}\n\nSTYLE: ${data.style}\nKEYWORDS: ${data.keywords}\nLOGOS THEY LOVE: ${data.admire}\n\nCOLORS: ${data.colors}\nAVOID: ${data.avoid_colors}\n\nFONT: ${data.fontpref}\nUSAGE: ${data.usage}\nFORMATS: ${data.formats}\n\nDEADLINE: ${data.deadline}\nBUDGET: ${data.budget}\n\nNOTES: ${data.extra}`;
+  try{
+    const res=await fetch(FORMSPREE,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({...data,_replyto:data.email,_subject:'🎨 New Logo Brief — '+(data.company||data.name||'Client')})});
+    if(!res.ok) throw new Error('status '+res.status);
+    document.getElementById('brief').style.display='none';
+    document.getElementById('ty').style.display='block';
+    document.getElementById('pf').style.width='100%';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } catch(err){
+    btn.disabled=false; btn.textContent='Submit brief ✦';
+    alert('Something went wrong. Please try again.\n'+err.message);
+  }
+});
+</script>
+</body>
+</html>
